@@ -1,0 +1,18 @@
+{
+    "name": "thoughtsideas/tools",
+    "type": "metapackage",
+    "license": "MIT",
+    "description": "Development tools.",
+    "minimum-stability": "stable",
+    "require": {
+        "thoughtsideas/dev-tools-wp": "dev-trunk@dev",
+        "thoughtsideas/dev-tools-php": "dev-trunk@dev",
+        "phpcompatibility/php-compatibility": "dev-develop as 9.99.99@dev"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        }
+    }
+}

@@ -1,0 +1,114 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+#
+# Version 1.0.0
+# Author: Thoughts & Ideas <hello@thoughtsandideas.uk>
+
+name: 'Commit'
+
+on:
+
+  workflow_dispatch:
+
+  push:
+
+concurrency:
+  group: ${{ github.workflow }}--${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+
+  # Security Test
+
+  security:
+    name: 'PHP Security Analysis'
+    runs-on: 'ubuntu-latest'
+
+    strategy:
+      fail-fast: true
+      max-parallel: 1
+      matrix:
+        php-version: ['8.1']
+
+    steps:
+
+      - name: 'Check out the repository.'
+        uses: 'actions/checkout@v4.1.1'
+
+      - name: 'Set up PHP environment.'
+        uses: 'shivammathur/setup-php@2.29.0'
+        with:
+          coverage: 'none'
+          ini-values: "memory_limit=-1"
+          tools: 'composer'
+          ini-file: none
+          php-version: "${{ matrix.php-version }}"
+        env:
+          COMPOSER_TOKEN: ${{ secrets.github-token }}
+
+      - name: 'Logs debug information.'
+        run: |
+          php --version
+          composer --version
+
+      - name: 'Validate Composer file.'
+        run: |
+          composer validate --ansi --strict
+
+      - name: 'Get Composer Cache Directory.'
+        id: 'composer-cache'
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: 'Sets up Caching.'
+        uses: 'actions/cache@v4.0.0'
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-php-composer-build-${{ hashFiles('composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-composer-build-
+
+      - name: 'Install dependencies.'
+        run: |
+          composer install --no-interaction --prefer-dist
+
+      - name: 'Run security test.'
+        run: |
+          composer run test:security
+
+  # Static Analysis Tests
+
+  lint:
+    name: 'Lint'
+    runs-on: 'ubuntu-latest'
+
+    strategy:
+      fail-fast: true
+      max-parallel: 1
+      matrix:
+        php-version: ['8.1']
+
+    steps:
+
+      - name: 'Check out the repository.'
+        uses: 'actions/checkout@v4.1.1'
+
+      - name: 'Set up PHP environment.'
+        uses: 'shivammathur/setup-php@2.29.0'
+        with:
+          coverage: 'xdebug'
+          ini-values: "memory_limit=-1"
+          tools: 'composer'
+          ini-file: none
+          php-version: "${{ matrix.php-version }}"
+        env:
+          COMPOSER_TOKEN: ${{ secrets.github-token }}
+
+      - name: 'Logs debug information.'
+        run: |
+          php --version
+          composer --version
+
+      - name: 'Validate Composer file.'
+        run: |
+          composer validate --ansi --strict

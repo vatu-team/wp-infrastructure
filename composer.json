@@ -1,0 +1,92 @@
+{
+    "name": "thoughtsideas/wp-infrastructure",
+    "description": "A collection of contracts to aid the development of WordPress add-ons.",
+    "license": "MIT",
+    "keywords": [
+        "wordpress"
+    ],
+    "readme": "https://github.com/thoughtsideas/wp-infrastrucuture/blob/trunk/readme.md",
+    "authors": [
+        {
+            "name": "Thoughts & Ideas",
+            "email": "hello@thoughtsandideas.uk",
+            "homepage": "https://thoughtsandideas.uk/",
+            "role": "Agency"
+        },
+        {
+            "name": "Michael Bragg",
+            "email": "email@michaelbragg.com",
+            "homepage": "https://www.michaelbragg.com/",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/thoughtsideas/wp-infrastrucuture/",
+    "support": {
+        "issues": "https://github.com/thoughtsideas/wp-infrastrucuture/issues/"
+    },
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "captainhook/captainhook": "^5.20",
+        "ergebnis/composer-normalize": "^2.41",
+        "madewithlove/license-checker": "^1.5",
+        "phly/keep-a-changelog": "^2.12",
+        "roave/security-advisories": "dev-latest"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "ThoughtsIdeas\\WordPress\\Infrastructure\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ThoughtsIdeas\\WordPress\\Infrastructure\\Tests\\": "tests/php/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "php-http/discovery": true
+        },
+        "audit": {
+            "abandoned": "report"
+        },
+        "optimize-autoloader": true,
+        "prefer-stable": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "composer-normalize": {
+            "indent-size": 4,
+            "indent-style": "space"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@composer run tools"
+        ],
+        "post-update-cmd": [
+            "@composer run tools"
+        ],
+        "post-autoload-dump": [
+            "vendor/bin/captainhook install -f -s"
+        ],
+        "test:license": "vendor/bin/license-checker check",
+        "test:lint": "@composer validate --ansi --strict",
+        "test:security": "@composer audit --ansi",
+        "test:unit": "./tools/vendor/bin/phpunit --testsuite unit",
+        "tools": [
+            "@composer install --working-dir=tools",
+            "@composer run post-install-cmd --working-dir=tools"
+        ]
+    },
+    "scripts-descriptions": {
+        "test:license": "Check licenses are compatible.",
+        "test:lint": "Lint file syntax.",
+        "test:security": "Check for security issues.",
+        "tools": "Install development tools."
+    }
+}
