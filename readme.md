@@ -32,7 +32,7 @@ If you spot any issues please create a ticket via the project's Issue Tracker. I
 Keeping user information safe and secure is a top priority, and we welcome the
 contribution of external security researchers. If you believe you've found a
 security issue in software that is maintained in this repository, please read
-[SECURITY](https://github.com/thoughtsideas/dev-tools-php/blob/trunk/security.md) for instructions on submitting a vulnerability report.
+[SECURITY](https://github.com/thoughtsideas/wp-infrastructure/blob/trunk/security.md) for instructions on submitting a vulnerability report.
 
 ## Contact
 
@@ -41,4 +41,4 @@ Thoughts & Ideas - [hello@thoughtsandideas.uk](hello@thoughtsandideas.uk)
 ## Copyright and License
 
 © 2022-2024 Thoughts & Ideas Limited and licensed for use under the terms of the
-MIT License (MIT). Please see [LICENSE](https://github.com/thoughtsideas/dev-tools-php/blob/trunk/license.txt) for more information.
+MIT License (MIT). Please see [LICENSE](https://github.com/thoughtsideas/wp-infrastructure/blob/trunk/license.txt) for more information.
