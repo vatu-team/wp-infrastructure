@@ -168,6 +168,8 @@ jobs:
   coding-standard:
     name: 'Coding Standard'
     needs:
+     - 'license'
+     - 'security'
      - 'validate'
     runs-on: 'ubuntu-latest'
 
@@ -225,6 +227,8 @@ jobs:
   static-analysis:
     name: 'Static Analysis'
     needs:
+     - 'license'
+     - 'security'
      - 'validate'
     runs-on: 'ubuntu-latest'
 
@@ -328,7 +332,7 @@ jobs:
 
       - name: 'Code Coverage'
         run: |
-          composer run test:unit -- --verbose --colors=always --coverage-text --coverage-clover build/logs/clover.xml
+          composer run test:unit -- --colors=always --coverage-text --coverage-clover build/logs/clover.xml
 
   unit-tests:
     name: 'Unit Tests'
@@ -383,6 +387,6 @@ jobs:
       - name: "Install dependencies."
         run: composer install --working-dir=tools --no-interaction --prefer-dist
 
-      - name: 'Lint file syntax.'
+      - name: 'Run Unit tests.'
         run: |
-          composer run test:unit -- --verbose --colors=always --no-coverage
+          composer run test:unit -- --colors=always --no-coverage
