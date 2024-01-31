@@ -1,0 +1,11 @@
+parameters:
+
+  level: 8
+
+  inferPrivatePropertyTypeFromConstructor: true
+
+  parallel:
+    maximumNumberOfProcesses: 8
+
+  paths:
+    - src/

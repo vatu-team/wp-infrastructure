@@ -74,9 +74,23 @@
         "post-autoload-dump": [
             "vendor/bin/captainhook install -f -s"
         ],
+        "test": [
+            "@composer run test:license",
+            "@composer run test:security",
+            "@composer run test:unit",
+            "@composer run test:lint"
+        ],
         "test:license": "vendor/bin/license-checker check",
-        "test:lint": "@composer validate --ansi --strict",
+        "test:lint": [
+            "@composer run test:lint:validate",
+            "@composer run test:lint:php",
+            "@composer run test:lint:phpcs"
+        ],
+        "test:lint:php": "./tools/vendor/bin/parallel-lint ./src",
+        "test:lint:phpcs": "./tools/vendor/bin/phpcs",
+        "test:lint:validate": "@composer validate --ansi --strict",
         "test:security": "@composer audit --ansi",
+        "test:static:phpstan": "./tools/vendor/bin/phpstan analyse",
         "test:unit": "./tools/vendor/bin/phpunit --testsuite unit",
         "tools": [
             "@composer install --working-dir=tools",
@@ -84,9 +98,14 @@
         ]
     },
     "scripts-descriptions": {
+        "test": "Run project tests.",
         "test:license": "Check licenses are compatible.",
         "test:lint": "Lint file syntax.",
+        "test:lint:php": "PHP Lint.",
+        "test:lint:phpcs": "PHP CodeSniffer with project rules.",
+        "test:lint:validate": "Validate Composer config file.",
         "test:security": "Check for security issues.",
+        "test:unit": "Run project Unit tests",
         "tools": "Install development tools."
     }
 }
