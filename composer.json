@@ -71,7 +71,7 @@
         "post-update-cmd": [
             "@composer run tools"
         ],
-        "post-autoload-dump": [
+        "dev-post-autoload-dump": [
             "vendor/bin/captainhook install -f -s"
         ],
         "test": [
