@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Interface: Main
+ * Abstract: Block
  *
  * @package   ThoughtsIdeas\WordPress\Infrastructure
  * @author    Thoughts & Ideas <hello@thoughtsandideas.uk>
@@ -14,6 +14,6 @@ declare(strict_types=1);
 
 namespace ThoughtsIdeas\WordPress\Infrastructure;
 
-interface Main
+abstract class Block extends Plugin
 {
 }
