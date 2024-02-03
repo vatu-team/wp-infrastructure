@@ -16,6 +16,8 @@ updates:
       prefix-development: "Upgraded"
 
   - package-ecosystem: composer
+    allow:
+      - dependency-type: "development"
     directory: "/"
     registries: "*"
     schedule:
