@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Interface: Registerable
+ * Interface: Registrable
  *
  * Register class with WordPress.
  *
@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace ThoughtsIdeas\WordPress\Infrastructure\Services;
 
-interface Registerable
+interface Registrable
 {
     /**
      * Register the service.
