@@ -18,4 +18,48 @@ use ThoughtsIdeas\Wordpress\Infrastructure\Services\ServiceProvider;
 
 abstract class Plugin implements Main
 {
+    /**
+     * @var array<string,string>
+     */
+    protected array $service_provider_classes = [];
+
+    /**
+     * @var array<string,string>
+     */
+    protected array $queued_service_container = [];
+
+    /**
+     * @var array<string,string>
+     */
+    protected array $service_container = [];
+
+    public function init(): void
+    {
+        // Enqueue Service Providers.
+        $this->registerServiceProviderClasses();
+    }
+
+    private function getServiceProviderClasses(): array
+    {
+        return $this->service_provider_classes;
+    }
+
+    private function enqueueServiceProviderClasses(): void
+    {
+        foreach ( $this->getServiceProviderClasses() as $prefix => $provider ) {
+            $this->service_container[ $prefix ] = $this->initializeServiceProvider( $provider );
+        }
+    }
+
+    private function registerServiceProviderClasses(): void
+    {
+        foreach ( $this->getServiceProviderClasses() as $prefix => $provider ) {
+            $this->service_container[ $prefix ] = $this->initializeServiceProvider( $provider );
+        }
+    }
+
+    private function initializeServiceProvider(string $service_provider): ServiceProvider
+    {
+        return new $service_provider();
+    }
 }
