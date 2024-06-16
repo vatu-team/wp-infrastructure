@@ -25,7 +25,8 @@
         "issues": "https://github.com/thoughtsideas/wp-infrastrucuture/issues/"
     },
     "require": {
-        "php": "^8.1"
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+        "captainhook/hook-installer": "^1.0"
     },
     "require-dev": {
         "captainhook/captainhook": "^5.22",
@@ -37,16 +38,17 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "ThoughtsIdeas\\WordPress\\Infrastructure\\": "src/"
+            "ThoughtsIdeas\\Wordpress\\Infrastructure\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ThoughtsIdeas\\WordPress\\Infrastructure\\Tests\\": "tests/php/"
+            "ThoughtsIdeas\\Wordpress\\Infrastructure\\Tests\\": "tests/php/"
         }
     },
     "config": {
         "allow-plugins": {
+            "captainhook/hook-installer": true,
             "ergebnis/composer-normalize": true,
             "php-http/discovery": true
         },
@@ -70,9 +72,6 @@
         ],
         "post-update-cmd": [
             "@composer run tools"
-        ],
-        "dev-post-autoload-dump": [
-            "vendor/bin/captainhook install -f -s"
         ],
         "test": [
             "@composer run test:license",
