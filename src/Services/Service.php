@@ -3,16 +3,16 @@
 /**
  * Interface: Service
  *
- * @package   ThoughtsIdeas\WordPress\Infrastructure
+ * @package   ThoughtsIdeas\Wordpress\Infrastructure
  * @author    Thoughts & Ideas <hello@thoughtsandideas.uk>
  * @link      https://www.thoughtsandideas.uk/
  * @license   MIT
  * @copyright 2022-2024 Thoughts & Ideas Limited.
  */
 
- declare(strict_types=1);
+declare(strict_types=1);
 
- namespace ThoughtsIdeas\WordPress\Infrastructure\Services;
+namespace ThoughtsIdeas\Wordpress\Infrastructure\Services;
 
 interface Service
 {

@@ -3,7 +3,7 @@
 /**
  * Test Case.
  *
- * @package   ThoughtsIdeas\WordPress\Infrastructure
+ * @package   ThoughtsIdeas\Wordpress\Infrastructure
  * @author    Thoughts & Ideas <hello@thoughtsandideas.uk>
  * @link      https://www.thoughtsandideas.uk/
  * @license   MIT
@@ -12,7 +12,7 @@
 
 declare(strict_types=1);
 
-namespace ThoughtsIdeas\WordPress\Infrastructure\Tests;
+namespace ThoughtsIdeas\Wordpress\Infrastructure\Tests;
 
 use Brain\Monkey;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;

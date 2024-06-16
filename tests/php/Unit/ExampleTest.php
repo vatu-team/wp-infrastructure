@@ -3,12 +3,12 @@
 /**
  * Test: Example
  *
- * @package ThoughtsIdeas\WordPress\Infrastructure
+ * @package ThoughtsIdeas\Wordpress\Infrastructure
  */
 
 declare(strict_types=1);
 
-namespace ThoughtsIdeas\WordPress\Infrastructure\Tests\Unit;
+namespace ThoughtsIdeas\Wordpress\Infrastructure\Tests\Unit;
 
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;

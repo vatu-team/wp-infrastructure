@@ -3,7 +3,7 @@
 /**
  * PHPUnit bootstrap file.
  *
- * @package   ThoughtsIdeas\WordPress\Infrastructure
+ * @package   ThoughtsIdeas\Wordpress\Infrastructure
  * @author    Thoughts & Ideas <hello@thoughtsandideas.uk>
  * @link      https://www.thoughtsandideas.uk/
  * @license   MIT
