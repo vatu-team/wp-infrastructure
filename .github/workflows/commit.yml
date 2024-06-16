@@ -335,6 +335,13 @@ jobs:
         run: |
           composer run test:unit -- --colors=always --coverage-text --coverage-clover build/logs/clover.xml
 
+      - name: 'Upload coverage to Codecov'
+        uses: 'codecov/codecov-action@v4.1.1'
+        with:
+          files: build/logs/clover.xml
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
   unit-tests:
     name: 'Unit Tests'
     needs:
