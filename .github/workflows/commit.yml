@@ -329,7 +329,7 @@ jobs:
 
       - name: "Install dependencies."
         run: |
-          composer install --no-interaction --prefer-dist --no-dev
+          composer install --no-interaction --prefer-dist
 
       - name: 'Code Coverage'
         run: |
@@ -398,7 +398,7 @@ jobs:
 
       - name: "Install dependencies."
         run: |
-          composer install --no-interaction --prefer-dist --no-dev
+          composer install --no-interaction --prefer-dist
 
       - name: 'Run Unit tests.'
         run: |
