@@ -29,7 +29,7 @@ abstract class Plugin implements Main
     protected array $queued_service_container = [];
 
     /**
-     * @var array<string,string>
+     * @var array<string,ServiceProvider>
      */
     protected array $service_container = [];
 
@@ -39,17 +39,20 @@ abstract class Plugin implements Main
         $this->registerServiceProviderClasses();
     }
 
+    /**
+     * @return array<string,string>
+     */
     private function getServiceProviderClasses(): array
     {
         return $this->service_provider_classes;
     }
 
-    private function enqueueServiceProviderClasses(): void
-    {
-        foreach ( $this->getServiceProviderClasses() as $prefix => $provider ) {
-            $this->service_container[ $prefix ] = $this->initializeServiceProvider( $provider );
-        }
-    }
+    // private function enqueueServiceProviderClasses(): void
+    // {
+    //     foreach ( $this->getServiceProviderClasses() as $prefix => $provider ) {
+    //         $this->service_container[ $prefix ] = $this->initializeServiceProvider( $provider );
+    //     }
+    // }
 
     private function registerServiceProviderClasses(): void
     {
@@ -60,6 +63,10 @@ abstract class Plugin implements Main
 
     private function initializeServiceProvider(string $service_provider): ServiceProvider
     {
-        return new $service_provider();
+        /**
+         * @var ServiceProvider $return
+         */
+        $return = new $service_provider();
+        return $return;
     }
 }

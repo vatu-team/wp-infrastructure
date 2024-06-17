@@ -45,6 +45,9 @@ abstract class ServiceProvider implements Provider
         return "{$this->service_prefix}.{$this->identifier}";
     }
 
+    /**
+     * @return array<string,Service>
+     */
     public function getServiceCollection(): array
     {
         return $this->service_collection;
