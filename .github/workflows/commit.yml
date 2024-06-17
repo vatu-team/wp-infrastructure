@@ -339,8 +339,7 @@ jobs:
         uses: 'codecov/codecov-action@v4.1.1'
         with:
           files: build/logs/clover.xml
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   unit-tests:
     name: 'Unit Tests'
