@@ -77,7 +77,8 @@
             "@composer run test:license",
             "@composer run test:security",
             "@composer run test:unit",
-            "@composer run test:lint"
+            "@composer run test:lint",
+            "@composer run test:static"
         ],
         "test:license": "vendor/bin/license-checker check",
         "test:lint": [
@@ -89,6 +90,9 @@
         "test:lint:phpcs": "./tools/vendor/bin/phpcs",
         "test:lint:validate": "@composer validate --ansi --strict",
         "test:security": "@composer audit --ansi",
+        "test:static": [
+            "@composer run test:static:phpstan"
+        ],
         "test:static:phpstan": "./tools/vendor/bin/phpstan analyse",
         "test:unit": "./tools/vendor/bin/phpunit --testsuite unit",
         "tools": [

@@ -20,6 +20,9 @@
                 "action": "composer run test:security"
             },
             {
+                "action": "composer run test:static"
+            },
+            {
                 "action": "composer normalize --ansi --dry-run",
                 "conditions": [
                     {
