@@ -2,6 +2,7 @@
 
 ![GitHub License](https://img.shields.io/github/license/thoughtsideas/wp-infrastructure?style=flat)
  [![Commit](https://github.com/thoughtsideas/wp-infrastructure/actions/workflows/commit.yml/badge.svg)](https://github.com/thoughtsideas/wp-infrastructure/actions/workflows/commit.yml)
+ [![codecov](https://codecov.io/gh/thoughtsideas/wp-infrastructure/graph/badge.svg?token=UDJBCIXBM9)](https://codecov.io/gh/thoughtsideas/wp-infrastructure)
 
 ## Project URLs
 
