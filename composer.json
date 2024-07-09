@@ -93,7 +93,7 @@
         "test:static": [
             "@composer run test:static:phpstan"
         ],
-        "test:static:phpstan": "./tools/vendor/bin/phpstan analyse",
+        "test:static:phpstan": "./tools/vendor/bin/phpstan analyse --memory-limit 1G",
         "test:unit": "./tools/vendor/bin/phpunit --testsuite unit",
         "tools": [
             "@composer install --working-dir=tools",
