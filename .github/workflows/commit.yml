@@ -222,7 +222,7 @@ jobs:
 
       - name: 'PHP CodeSniffer with project rules.'
         run: |
-          composer run test:lint:phpcs
+          composer run test:lint:coding-standards
 
   static-analysis:
     name: 'Static Analysis'
