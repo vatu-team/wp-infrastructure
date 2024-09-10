@@ -18,12 +18,12 @@ use ThoughtsIdeas\Wordpress\Infrastructure\Services\ServiceProvider;
 
 final class DummyServiceProvider extends ServiceProvider
 {
-    protected string $identifier = 'dummyserviceprovider';
+    protected string $identifier = 'Provider';
 
     /**
      * @var array<string>
      */
-    protected array $service_class_collection = [
+    protected array $service_collection = [
         DummyService::class,
     ];
 }

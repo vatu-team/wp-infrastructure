@@ -30,8 +30,7 @@ class ServiceProviderTest extends TestCase
         self::assertInstanceOf(
             Provider::class,
             new DummyServiceProvider(
-                service_prefix: 'thoughtsideas.infrastructure',
-                hook_prefix: 'thoughtsideas.infrastructure'
+                hook_prefix: 'ThoughtsIdeas.Plugin'
             )
         );
     }
@@ -49,50 +48,8 @@ class ServiceProviderTest extends TestCase
         self::assertInstanceOf(
             ServiceProvider::class,
             new DummyServiceProvider(
-                service_prefix: 'thoughtsideas.infrastructure',
-                hook_prefix: 'thoughtsideas.infrastructure'
+                hook_prefix: 'ThoughtsIdeas.Plugin'
             )
-        );
-    }
-
-    /**
-     * Service Provider Name is returned as String.
-     *
-     * @test
-     * @covers \ThoughtsIdeas\Wordpress\Infrastructure\Services\ServiceProvider::getIdentifier
-     *
-     * @return void
-     */
-    public function testServiceReturnsIdentifierAsString(): void
-    {
-        $service_provider = new DummyServiceProvider(
-            service_prefix: 'thoughtsideas.infrastructure',
-            hook_prefix: 'thoughtsideas.infrastructure'
-        );
-
-        self::assertIsString(
-            $service_provider->getIdentifier()
-        );
-    }
-
-    /**
-     * Service Provider Name is returned as String.
-     *
-     * @test
-     * @covers \ThoughtsIdeas\Wordpress\Infrastructure\Services\ServiceProvider::getIdentifier
-     *
-     * @return void
-     */
-    public function testServiceReturnsConcatinatedIdentifier(): void
-    {
-        $service_provider = new DummyServiceProvider(
-            service_prefix: 'thoughtsideas.infrastructure',
-            hook_prefix: 'thoughtsideas.infrastructure'
-        );
-
-        self::assertEquals(
-            'thoughtsideas.infrastructure.dummyserviceprovider',
-            $service_provider->getIdentifier()
         );
     }
 
@@ -108,17 +65,16 @@ class ServiceProviderTest extends TestCase
     public function testInitializeService(): void
     {
         $service_provider = new DummyServiceProvider(
-            service_prefix: 'thoughtsideas.infrastructure',
-            hook_prefix: 'thoughtsideas.infrastructure'
+            hook_prefix: 'ThoughtsIdeas.Plugin'
         );
 
         $service_provider->initializeServiceCollection();
 
-        $act = $service_provider->getServiceCollection();
+        $act = $service_provider->getServiceContainer();
 
         self::assertInstanceOf(
-            Service::class,
-            $act['thoughtsideas.infrastructure.dummyserviceprovider.dummy']
+            expected: Service::class,
+            actual: $act['ThoughtsIdeas\Wordpress\Infrastructure\Tests\Unit\Services\DummyService']
         );
     }
 
@@ -126,24 +82,22 @@ class ServiceProviderTest extends TestCase
      * Get Service Collection
      *
      * @test
-     * @covers \ThoughtsIdeas\Wordpress\Infrastructure\Services\ServiceProvider::getServiceCollection
+     * @covers \ThoughtsIdeas\Wordpress\Infrastructure\Services\ServiceProvider::getServiceContainer
      *
      * @return void
      */
-    public function testGetServiceCollectionReturnsArray(): void
+    public function testGetServiceContainerReturnsArray(): void
     {
         $service_provider = new DummyServiceProvider(
-            service_prefix: 'thoughtsideas.infrastructure',
-            hook_prefix: 'thoughtsideas.infrastructure'
+            hook_prefix: 'ThoughtsIdeas.Plugin'
         );
 
         $service_provider->initializeServiceCollection();
-        $service_collection = $service_provider->getServiceCollection();
-
+        $act = $service_provider->getServiceContainer();
 
         self::assertInstanceOf(
             expected: DummyService::class,
-            actual: $service_collection['thoughtsideas.infrastructure.dummyserviceprovider.dummy']
+            actual: $act['ThoughtsIdeas\Wordpress\Infrastructure\Tests\Unit\Services\DummyService']
         );
     }
 }

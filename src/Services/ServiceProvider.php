@@ -18,52 +18,48 @@ abstract class ServiceProvider implements Provider
 {
     protected string $identifier;
 
-    protected string $service_prefix;
-
     protected string $hook_prefix;
 
     /**
      * @var array<string>
      */
-    protected array $service_class_collection = [];
+    protected array $service_collection = [];
 
     /**
      * @var array<string,Service>
      */
-    private array $service_collection = [];
+    private array $service_container = [];
 
     public function __construct(
-        string $service_prefix,
         string $hook_prefix
     ) {
-        $this->service_prefix = $service_prefix;
-        $this->hook_prefix    = $hook_prefix;
-    }
-
-    public function getIdentifier(): string
-    {
-        return "{$this->service_prefix}.{$this->identifier}";
+        $this->hook_prefix = $hook_prefix;
     }
 
     /**
+     * Return collection of Services provided by this Service Provider.
+     *
      * @return array<string,Service>
      */
-    public function getServiceCollection(): array
+    public function getServiceContainer(): array
     {
-        return $this->service_collection;
+        return $this->service_container;
     }
 
     public function initializeServiceCollection(): void
     {
-        foreach ( $this->service_class_collection as $service_class ) {
+        foreach ( $this->service_collection as $service_class ) {
+            /**
+             * @var Service $service
+             */
             $service = $this->initializeService( $service_class );
-            $this->service_collection[ $service->getName() ] = $service;
+            $this->service_container[ $service::class ] = $service;
 
-            if ( !($this->service_collection[ $service->getName() ] instanceof Registrable) ) {
+            if ( !($this->service_container[ $service::class ] instanceof Registrable) ) {
                 continue;
             }
 
-            $this->service_collection[ $service->getName() ]->register();
+            $this->service_container[ $service::class ]->register();
         }
     }
 
@@ -73,9 +69,9 @@ abstract class ServiceProvider implements Provider
          * @var Service $return
          */
         $return = new $service(
-            "{$this->service_prefix}.{$this->identifier}",
-            "{$this->hook_prefix}.{$this->identifier}"
+            hook_prefix: "{$this->hook_prefix}.{$this->identifier}"
         );
+
         return $return;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Dummy: Serivce Loader
+ * Dummy: Serivce Locator
  *
  * @package   ThoughtsIdeas\Wordpress\Infrastructure
  * @author    Thoughts & Ideas <hello@thoughtsandideas.uk>
@@ -15,16 +15,18 @@ declare(strict_types=1);
 namespace ThoughtsIdeas\Wordpress\Infrastructure\Tests\Unit\Services;
 
 use ThoughtsIdeas\Wordpress\Infrastructure\Main;
-use ThoughtsIdeas\Wordpress\Infrastructure\Services\ServiceLoader;
+use ThoughtsIdeas\Wordpress\Infrastructure\Services\ServiceLocator;
 
-final class DummyServiceLoader extends ServiceLoader implements Main
+final class DummyServiceLocator extends ServiceLocator implements Main
 {
-	protected string $identifier = 'dummyserviceloader';
+	protected string $identifier = 'Plugin';
+
+    protected string $name = 'DummyServiceLocator';
 
     /**
      * @var array<string>
      */
-    protected array $provider_class_list = [
+    protected array $provider_collection = [
 		DummyServiceProvider::class,
 	];
 }

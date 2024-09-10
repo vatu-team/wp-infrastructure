@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Interface: Loader
+ * Interface: Locator
  *
  * @package   ThoughtsIdeas\Wordpress\Infrastructure
  * @author    Thoughts & Ideas <hello@thoughtsandideas.uk>
@@ -14,6 +14,6 @@ declare(strict_types=1);
 
 namespace ThoughtsIdeas\Wordpress\Infrastructure\Services;
 
-interface Loader
+interface Locator
 {
 }

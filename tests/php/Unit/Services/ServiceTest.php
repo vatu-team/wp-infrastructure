@@ -22,45 +22,15 @@ class ServiceTest extends TestCase
      *
      * @return void
      */
-    public function testServicePrefixIsSet(): void
-    {
-        $service = new DummyService(
-            service_prefix: 'thoughtsideas.infrastructure',
-            hook_prefix: 'thoughtsideas.infrastructure'
-        );
-
-        self::assertIsString(
-            $service->getServicePrefix()
-        );
-
-        self::assertSame(
-            expected: 'thoughtsideas.infrastructure',
-            actual: $service->getServicePrefix()
-        );
-    }
-
-    /**
-     * Service Parameters are set.
-     *
-     * @test
-     * @covers \ThoughtsIdeas\Wordpress\Infrastructure\Services\Service
-     *
-     * @return void
-     */
     public function testServiceHookIsSet(): void
     {
         $service = new DummyService(
-            service_prefix: 'thoughtsideas.infrastructure',
-            hook_prefix: 'thoughtsideas.infrastructure'
-        );
-
-        self::assertIsString(
-            $service->getHookPrefix()
+            hook_prefix: 'ThoughtsIdeas.Plugin'
         );
 
         self::assertSame(
-            expected: 'thoughtsideas.infrastructure',
-            actual: $service->getHookPrefix()
+            expected: 'ThoughtsIdeas.Plugin.Service',
+            actual: $service->getHook()
         );
     }
 
@@ -75,12 +45,31 @@ class ServiceTest extends TestCase
     public function testServiceReturnsNameAsString(): void
     {
         $service = new DummyService(
-            service_prefix: 'thoughtsideas.infrastructure',
-            hook_prefix: 'thoughtsideas.infrastructure'
+            hook_prefix: 'ThoughtsIdeas.Plugin'
         );
 
         self::assertIsString(
             $service->getName()
+        );
+    }
+
+    /**
+     * Service Hook is concatanated with prefix.
+     *
+     * @test
+     * @covers \ThoughtsIdeas\Wordpress\Infrastructure\Services\Service::getHook
+     *
+     * @return void
+     */
+    public function testServiceHookIsConcatanatedWithPrefix(): void
+    {
+        $service = new DummyService(
+            hook_prefix: 'ThoughtsIdeas.Plugin'
+        );
+
+        self::assertSame(
+            expected: 'ThoughtsIdeas.Plugin.Service',
+            actual: $service->getHook()
         );
     }
 
@@ -95,12 +84,11 @@ class ServiceTest extends TestCase
     public function testServiceIsConcatanatedWithPrefix(): void
     {
         $service = new DummyService(
-            service_prefix: 'thoughtsideas.infrastructure',
-            hook_prefix: 'thoughtsideas.infrastructure'
+            hook_prefix: 'ThoughtsIdeas.Plugin'
         );
 
         self::assertSame(
-            expected: 'thoughtsideas.infrastructure.dummy',
+            expected: 'Service',
             actual: $service->getName()
         );
     }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Abstract: Serivce Loader
+ * Abstract: Serivce Locator
  *
  * @package   ThoughtsIdeas\Wordpress\Infrastructure
  * @author    Thoughts & Ideas <hello@thoughtsandideas.uk>
@@ -14,40 +14,43 @@ declare(strict_types=1);
 
 namespace ThoughtsIdeas\Wordpress\Infrastructure\Services;
 
-abstract class ServiceLoader implements Loader
+abstract class ServiceLocator implements Locator
 {
     /**
      * WordPress action to trigger the service registration on.
      */
     protected string $registration_action = 'plugins_loaded';
 
-    protected string $identifier;
+    protected string $name;
 
-    protected string $service_prefix;
+    protected string $identifier;
 
     protected string $hook_prefix;
 
     /**
      * @var array<string>
      */
-    protected array $provider_class_list = [];
+    protected array $provider_collection = [];
 
     /**
      * Providers to be loaded.
      *
      * @var array<string,Provider>
      */
-    protected array $provider_collection = [];
+    private array $provider_container = [];
 
     public function __construct(
-        string $service_prefix,
         string $hook_prefix
     ) {
-            $this->service_prefix = $service_prefix;
-            $this->hook_prefix    = $hook_prefix;
+        $this->hook_prefix    = $hook_prefix;
     }
 
-    public function pluginsLoaded(): void
+    public function getHook(): string
+    {
+        return "{$this->hook_prefix}.{$this->identifier}";
+    }
+
+    public function bootstrap(): void
     {
         \add_action(
             $this->registration_action,
@@ -62,31 +65,31 @@ abstract class ServiceLoader implements Loader
      */
     public function getProviderCollection(): array
     {
-        return $this->provider_collection;
+        return $this->provider_container;
     }
 
     public function initializeProviderCollection(): void
     {
-        foreach ( $this->provider_class_list as $provider_class ) {
+        foreach ( $this->provider_collection as $provider_class ) {
             $provider = $this->initializeProvider( $provider_class );
-            $this->provider_collection[ $provider->getIdentifier() ] = $provider;
+            $this->provider_container[ $provider::class ] = $provider;
 
-            if ( ! ($this->provider_collection[ $provider->getIdentifier() ] instanceof ServiceProvider) ) {
+            if ( ! ($this->provider_container[ $provider::class ] instanceof ServiceProvider) ) {
                     continue;
             }
 
-            $this->provider_collection[ $provider->getIdentifier() ]->initializeServiceCollection();
+            $this->provider_container[ $provider::class ]->initializeServiceCollection();
         }
     }
 
     public function initializeProvider(string $service_provider): ServiceProvider
     {
+
         /**
          * @var ServiceProvider $return
          */
         $return = new $service_provider(
-            "{$this->service_prefix}.{$this->identifier}",
-            "{$this->hook_prefix}.{$this->identifier}"
+            $this->getHook()
         );
         return $return;
     }

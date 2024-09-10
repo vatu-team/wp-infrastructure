@@ -19,26 +19,10 @@ use ThoughtsIdeas\Wordpress\Infrastructure\Services\Service;
 
 final class DummyService extends Service implements Registrable
 {
-    protected string $service_name = 'dummy';
+    protected string $name = 'Service';
 
     public function register(): void
     {
         // Add WordPress Hooks here.
-    }
-
-    /**
-     * Test Helper.
-     */
-    public function getServicePrefix(): string
-    {
-        return $this->service_prefix;
-    }
-
-    /**
-     * Test Helper.
-     */
-    public function getHookPrefix(): string
-    {
-        return $this->hook_prefix;
     }
 }

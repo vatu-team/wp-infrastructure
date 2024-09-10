@@ -16,22 +16,23 @@ namespace ThoughtsIdeas\Wordpress\Infrastructure\Services;
 
 abstract class Service
 {
-    protected string $service_name;
+    protected string $name;
 
-    protected string $service_prefix;
-
-    protected string $hook_prefix;
+    protected string $hook;
 
     public function __construct(
-        string $service_prefix,
         string $hook_prefix
     ) {
-        $this->service_prefix = $service_prefix;
-        $this->hook_prefix    = $hook_prefix;
+        $this->hook = "{$hook_prefix}.{$this->name}";
     }
 
     public function getName(): string
     {
-        return $this->service_prefix . "." . $this->service_name;
+        return $this->name;
+    }
+
+    public function getHook(): string
+    {
+        return $this->hook;
     }
 }

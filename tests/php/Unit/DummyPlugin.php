@@ -18,7 +18,6 @@ use ThoughtsIdeas\Wordpress\Infrastructure\Plugin;
 
 class DummyPlugin extends Plugin
 {
-    private const HOOK_PREFIX    = 'thoughtsideas.dummy-plugin';
     private const SERVICE_PREFIX = 'thoughtsideas.dummy-plugin';
 
     /**
